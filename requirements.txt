@@ -1,0 +1,8 @@
+Flask==3.0.3
+flask_bootstrap==3.3.7.1
+matplotlib==3.9.2
+pandas==2.2.3
+PyQt5==5.15.11
+PyYAML==6.0.2
+qdarkstyle==3.2.3
+screeninfo==0.8.1

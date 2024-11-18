@@ -1,0 +1,222 @@
+{% extends "layouts/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block css_import %}
+    <link href="/static/css/material-components-web.min.css" rel="stylesheet">
+    <link href="/static/css/dataTables.material.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/flatpickr.min.css">
+    <link href="/static/css/select2.min.css" rel="stylesheet">
+    <link href='/static/css/buttons.dataTables.min.css' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block header_content %}
+    <li class="nav-item active">
+        <a class="nav-link" href="#">Dashbaord <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" onclick="alert('monitorViewer includes a python framework for customing monitoring scripts and a set of information dashboards. Users can easily customize their monitoring items based on monitorViewer.')">About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" onclick="alert('Please be free to contact liyanqing1987@163.com if any question.')">Contact</a>
+    </li>
+{% endblock %}
+
+{% block subheader_content %}
+    <div class="row" id="subheader-monitor-viewer">
+        <div class="col-md-4 d-flex align-items-center">
+            <nav aria-label="breadcrumb" style="margin-top: 12px;">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">monitorViewer</li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <input type="text" style="width: 50%; margin-right: 10px;" class="form-control"
+                   id="begin_datetime" autocomplete="off" placeholder="开始时间" value="{{ begin_date_time }}">
+            <input type="text" style="width: 50%;" class="form-control"
+                   id="end_datetime" autocomplete="off" placeholder="结束时间" value="{{ end_date_time }}">
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <!-- Main Content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="width: 100%; margin-top:56px;">
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-md-12">
+                <div class="row mt-5" style="margin-top: 10px !important;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3" roll_to="#nav-item-monitor-item"
+                                 onclick="toggleTabs('monitor-item-li', this)" style="cursor: pointer;">
+                                <div class="card" style="background-color: #198754">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-chart-line card-icon"></i>
+                                        <h5 class="card-title">Monitor Item</h5>
+                                        <p class="card-text">Total Monitor: {{ monitor_count }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" roll_to="#nav-item-alarm-data"
+                                 onclick="toggleTabs('alarm-data-li', this)" style="cursor: pointer;">
+                                <div class="card" style="background-color: #DC3545">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-users card-icon"></i>
+                                        <h5 class="card-title">Alarm</h5>
+                                        <p class="card-text" id="card-total-alarm-count">Total
+                                            Alarm: {{ alarm_count }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" roll_to="#nav-item-log-data" onclick="toggleTabs('log-data-li', this)"
+                                 style="cursor: pointer;">
+                                <div class="card" style="background-color: #FFC107">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-chart-bar card-icon"></i>
+                                        <h5 class="card-title">Error Log</h5>
+                                        <p class="card-text">Total Error Log: {{ error_log_count }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" roll_to="#nav-item-heartbeat-data"
+                                 onclick="toggleTabs('heartbeat-data-li', this)" style="cursor: pointer;">
+                                <div class="card" style="background-color: #0DCAF0">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-chart-bar card-icon"></i>
+                                        <h5 class="card-title">Heartbeat</h5>
+                                        <p class="card-text" id="total-heartbeat-count-p"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-6">
+                <div id="alarm-chart" style="width:100%; height:400px;"></div>
+            </div>
+            <div class="col-6">
+                <div id="monitor-chart" style="width:100%; height:400px;"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-6">
+                <div id="error-log-chart" style="width:100%; height:400px;"></div>
+            </div>
+            <div class="col-6">
+                <div id="heartbeat-chart" style="width:100%; height:400px;"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col">
+                <hr>
+            </div>
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active monitor-item-li" roll_to="#nav-item-monitor-item"
+                       onclick="toggleTabs('monitor-item-li', this)">Monitor Item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alarm-data-li" roll_to="#nav-item-alarm-data"
+                       onclick="toggleTabs('alarm-data-li', this)">Alarm Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link log-data-li" roll_to="#nav-item-log-data" onclick="toggleTabs('log-data-li', this)">Log
+                        Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link heartbeat-data-li" roll_to="#nav-item-heartbeat-data"
+                       onclick="toggleTabs('heartbeat-data-li', this)">Heartbeat
+                        Data</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row collapse show" id="nav-item-monitor-item">
+            <div class="col-12">
+                <table id="monitor-details-table" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Admin</th>
+                        <th>Item</th>
+                        <th>Startup</th>
+                        <th>Host</th>
+                        <th>Exec_Frequency</th>
+                        <th>Alarm_Frequency</th>
+                        <th>Script</th>
+                    </tr>
+                    </thead>
+                    <tfoot class="table-success">
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row collapse" id="nav-item-alarm-data">
+            <div class="col-12">
+                <table id="alarm-details-table" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Monitor_Item</th>
+                        <th>Time</th>
+                        <th>Receivers</th>
+                        <th>Alarm_Result</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="row collapse" id="nav-item-log-data">
+            <div class="col-12">
+                <table id="log-details-table" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Monitor_Item</th>
+                        <th>Time</th>
+                        <th>Message_Level</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="row collapse" id="nav-item-heartbeat-data">
+            <div class="col-12">
+                <table id="heartbeat-details-table" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Monitor_Item</th>
+                        <th>Time</th>
+                        <th>User</th>
+                        <th>Host</th>
+                        <th>Script</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js_import_content %}
+    <script src="/static/js/material-components-web.min.js"></script>
+    <script src="/static/js/dataTables.js"></script>
+    <script src="/static/js/dataTables.material.js"></script>
+    <script src="/static/js/highcharts.js"></script>
+    <script src="/static/js/highcharts-networkgraph.js"></script>
+    <script src="/static/js/highcharts-exporting.js"></script>
+    <script src="/static/js/highcharts-accessibility.js"></script>
+    <script src="/static/js/flatpickr.js"></script>
+    <script src="/static/js/dataTables.buttons.min.js"></script>
+    <script src="/static/js/buttons.html5.min.js"></script>
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/overview.js"></script>
+{% endblock %}

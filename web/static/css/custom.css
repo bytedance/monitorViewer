@@ -1,0 +1,130 @@
+.form_item_margin_bottom {
+    margin-bottom: 10px;
+}
+
+.page_header {
+    background-color: #7432F9;
+    text-align: left;
+    width: 100%;
+    height: 56px;
+    left: 0;
+    top: 0;
+}
+
+.header-title {
+    height: 48px;
+    padding-left: 15px;
+    color: white;
+}
+
+.mdc-data-table__cell {
+    white-space: normal;
+    height: auto;
+}
+
+.select2-container {
+    display: block !important;
+}
+
+th {
+    min-width: 150px !important;
+    max-width: 400px !important;
+}
+
+.select2-selection--single {
+    background-color: transparent !important;
+}
+
+.mdc-layout-grid label {
+    margin-left:10px;
+}
+
+.select2-search__field {
+    border-color: transparent !important;
+}
+
+.select2-results__option {
+     color: black !important;
+ }
+
+.select2-results__option--highlighted {
+    color: white !important;
+}
+
+.mdc-button--colored {
+    background-color: #0D6EFD !important;
+}
+
+div#subheader-monitor-viewer {
+    position: fixed;
+    top: 56px;
+    margin-right:0px;
+    margin-left:0px;
+    width: 100%;
+    background-color: #E9ECEF;
+    z-index: 1030;
+    height: 50px;
+}
+
+body {
+    background-color: #E4EAF1;
+}
+
+.highcharts-container {
+    border-radius: 15px;
+}
+
+table {
+    margin-bottom: 0px !important;
+}
+
+.card-body {
+    color: white !important;
+}
+
+div .card {
+    border-radius: 15px;
+}
+
+.nav-pills {
+    background-color: white !important;
+    border-radius: 15px;
+}
+
+input[type="search"] {
+    border-radius: 5px;
+    border: 1px;
+    background-color: white !important;
+}
+
+.mdc-layout-grid__inner.dt-table.mdc-data-table {
+    border-radius: 15px !important;
+}
+
+a.nav-link.active {
+    border-radius: 15px !important;
+}
+
+ul.nav.nav-pills.nav-fill {
+    padding-right:0px !important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    z-index: 1001; /* 确保遮罩层在最上层 */
+}
+
+div#loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    width: 20%;
+}
