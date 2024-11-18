@@ -1,3 +1,5 @@
+# Copyright (c) 2024 Bytedance Ltd. and/or its affiliates
+# SPDX-License-Identifier: GPL-3.0-only
 import os
 import re
 import sys
