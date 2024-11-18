@@ -24,7 +24,7 @@ from config import config
 
 os.environ['PYTHONUNBUFFERED'] = '1'
 VERSION = 'V1.0'
-VERSION_DATE = '2024.10.31'
+VERSION_DATE = '2024.11.01'
 
 # Solve some unexpected warning message.
 if 'XDG_RUNTIME_DIR' not in os.environ:
