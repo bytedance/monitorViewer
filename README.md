@@ -2,7 +2,7 @@
 
 
 ## What's monitorViewer?
-MonitorViewer includes a python framework for customing monitoring scripts and a set of information 
+monitorViewer includes a python framework for customing monitoring scripts and a set of information 
 dashboards. Users can easily customize their monitoring items based on monitorViewer.
 
 
@@ -20,24 +20,18 @@ Execute below command under install directory.
     python3 install.py
 
 
-## Quick start
-Execute command `batch_run --help` to get usage information.
-Execute command `batch_run --gui` to enable GUI mode.
-* Below is a demo on how to run command with command line.
+## Demo
+* Below is a demo of GUI dashboard.
 
-   ![command_line_run_demo](data/demo/command_line_run_demo.gif)
+   ![GUI_demo](data/demo/gui_alarm_demo.png)
 
-* Below is a demo on how to run command with GUI.
+* Below is a demo web dashboard.
 
-   ![gui_run_demo](data/demo/gui_run_demo.gif)
-
-* Below is a demo on how to filter host with OS/CPU/MEM.
-
-   ![host_filter_demo](data/demo/host_filter_demo.gif)
+   ![web_demo](data/demo/web_demo.png)
 
 
 ## Configuration
-Come into <BATCH_RUN_INSTALL_PATH>/config directory,
+Come into <MONITOR_VIEWER_INSTALL_PATH>/config directory,
 
   - Update "config.py" for monitorViewer basic configuration.
 
@@ -64,4 +58,4 @@ More details please see ["docs/monitorViewer_user_manual.pdf"](./docs/monitorVie
 ***
 |Version |Date       |Update content           |
 |:-------|:----------|:------------------------|
-| V1.0   |(2024.10)  |Release original version |
+| V1.0   |(2024.11)  |Release original version |
