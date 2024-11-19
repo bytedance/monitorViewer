@@ -5,6 +5,14 @@
 monitorViewer includes a python framework for customing monitoring scripts and a set of information 
 dashboards. Users can easily customize their monitoring items based on monitorViewer.
 
+* Below is a demo of GUI dashboard.
+
+   ![GUI_demo](data/demo/gui_alarm_demo.png)
+
+* Below is a demo web dashboard.
+
+   ![web_demo](data/demo/web_demo.png)
+
 
 ## Python dependency
 Need python3.12.7
@@ -18,16 +26,6 @@ Copy install package into install directory.
 Execute below command under install directory.
 
     python3 install.py
-
-
-## Demo
-* Below is a demo of GUI dashboard.
-
-   ![GUI_demo](data/demo/gui_alarm_demo.png)
-
-* Below is a demo web dashboard.
-
-   ![web_demo](data/demo/web_demo.png)
 
 
 ## Configuration
